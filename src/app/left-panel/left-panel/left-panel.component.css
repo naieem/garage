@@ -1,0 +1,10 @@
+.left-panel-container {
+    width: 16%;
+}
+
+.static-left-panel {
+    position: fixed;
+    height: 100%;
+    background-color: #ececec;
+    width: inherit;
+}

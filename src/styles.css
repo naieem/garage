@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+img {
+    max-width: 100%;
+}
+
+
+/* custom margin styles */
+
+.margin-left-135 {
+    margin-left: 135px !important;
+}
+
+.margin-left-10 {
+    margin-left: 10px !important;
+}
+
+.margin-top-10 {
+    margin-top: 10px !important;
+}
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+
+
+/* custom padding styles */
+
+.padding-10 {
+    padding: 10px !important;
+}
+
+.padding-20 {
+    padding: 20px !important;
+}
+
+.padding-v-10 {
+    padding: 10px 0 !important;
+}
+
+.padding-h-10 {
+    padding: 0px 10px !important;
+}
+
+.padding-v-20 {
+    padding: 20px 0 !important;
+}
+
+.padding-h-20 {
+    padding: 0px 20px !important;
+}

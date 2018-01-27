@@ -1,0 +1,14 @@
+<!-- left panel -->
+<app-left-panel [name]="name" (updatedName)="nameUpdated($event)"></app-left-panel>
+<div class="container">
+    <div class="row">
+        <!-- main content -->
+        <div class="col-md-10 margin-left-135 margin-top-20">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- right panel -->
+        <!-- <div class="col-md-4 margin-top-20">
+            <app-right-panel></app-right-panel>
+        </div> -->
+    </div>
+</div>
