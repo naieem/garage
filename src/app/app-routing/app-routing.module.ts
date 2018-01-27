@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-// ----------- imported module list ------------//
+// ----------- importing dependencies modules list ------------//
 import { LoginModule } from '../login/login.module';
 import { MainContentModule } from '../main-content/main-content.module';
-// ----------- imported component ------------//
+import { GarageModule } from '../garage/garage.module';
+import { PageNotFoundModule } from '../page-not-found/page-not-found.module';
+// ----------- importing dependency components list ------------//
 import { LoginComponent } from '../login/login/login.component';
 import { MainContentComponent } from '../main-content/main-content/main-content.component';
+import { GarageComponent } from '../garage/garage/garage.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {
@@ -17,6 +21,16 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'garage',
+    component: GarageComponent
+  },
+  {
+    path: '**',
+    // redirectTo: '/login',
+    // pathMatch: 'full'
+    component: PageNotFoundComponent
   }
 ];
 
@@ -34,6 +48,6 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routerModules = [LoginModule, MainContentModule];
+export const routerModules = [LoginModule, MainContentModule, GarageModule, PageNotFoundModule];
 
 
