@@ -1,5 +1,5 @@
-import { Component, OnInit,OnDestroy  } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../car.service';
 import { Car } from '../car';
 @Component({
@@ -7,16 +7,16 @@ import { Car } from '../car';
   templateUrl: './car-details.component.html',
   styleUrls: ['./car-details.component.css']
 })
-export class CarDetailsComponent implements OnInit,OnDestroy  {
+export class CarDetailsComponent implements OnInit, OnDestroy  {
   private id: number;
   private Observer: any;
-  private car:Car;
-  constructor(private route: ActivatedRoute,private carService:CarService,private router:Router) { }
+  private car: Car;
+  constructor(private route: ActivatedRoute, private carService: CarService, private router: Router) { }
 
   ngOnInit() {
     this.Observer = this.route.params.subscribe(params => {
       this.id = +params['id'];
-      this.car=this.carService.getCarDetailsByID(this.id);
+      this.car = this.carService.getCarDetailsByID(this.id);
       console.log(this.car);
    });
   }
@@ -25,8 +25,8 @@ export class CarDetailsComponent implements OnInit,OnDestroy  {
    * Updating car information
    * @param obj
    */
-  updateCarData(car){
-    this.carService.updateCarDetails(car,this.id);
+  updateCarData(car) {
+    this.carService.updateCarDetails(car, this.id);
     this.router.navigate(['/garage']);
   }
 
@@ -34,7 +34,7 @@ export class CarDetailsComponent implements OnInit,OnDestroy  {
    * Go Back to car list
    * @param {}
    */
-  goBack(){
+  goBack() {
     this.router.navigate(['/garage']);
   }
 

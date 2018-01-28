@@ -8,15 +8,26 @@ import { CarService } from '../car.service'; // car actions service
   styleUrls: ['./car-new.component.css']
 })
 export class CarNewComponent implements OnInit {
-  private car:Car;
-  constructor(private carService:CarService,private router:Router) { 
-    this.car=new Car();
+  private car: Car;
+  constructor(private carService: CarService, private router: Router) {
+    this.car = new Car();
   }
 
   ngOnInit() {
   }
-  addNewCar(){
+  /**
+   * adding new car
+   * @param {}
+   */
+  addNewCar() {
     this.carService.addNewCar(this.car);
+    this.router.navigate(['/garage']);
+  }
+  /**
+   * Go Back to car list
+   * @param {}
+   */
+  goBack() {
     this.router.navigate(['/garage']);
   }
 

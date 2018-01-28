@@ -1,4 +1,4 @@
-<form class="margin-top-20" (ngSubmit)="addNewCar()">
+<form class="margin-top-20 margin-bottom-20" (ngSubmit)="addNewCar()">
     <div class="form-group">
         <label for="">Car Name</label>
         <input type="text" class="form-control" [(ngModel)]="car.name" name="name" placeholder="Car Name">
@@ -16,4 +16,5 @@
         <textarea class="form-control" [(ngModel)]="car.description" name="desription" rows="10"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
 </form>

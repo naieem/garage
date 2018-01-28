@@ -3,7 +3,7 @@ export class Car {
     model: string;
     modelYear: string;
     description: string;
-    constructor(){
+    constructor() {
 
     }
 }
