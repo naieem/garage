@@ -23,6 +23,11 @@ export class MenuComponent implements OnInit {
         name: 'Garage',
         url: '/garage',
         action: ''
+      },
+      {
+        name: 'Songs',
+        url: '/songs',
+        action: ''
       }
     ];
   }

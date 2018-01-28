@@ -5,14 +5,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./garage.component.css']
 })
 export class GarageComponent implements OnInit {
-  private notificaton:number;
+  private notificaton: number;
   constructor() {
-    this.notificaton=0;
-   }
+    this.notificaton = 0;
+  }
 
   ngOnInit() {
   }
-  addNewCar(){
+  addNewCar() {
     alert('hello world');
   }
 }

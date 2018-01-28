@@ -25,6 +25,10 @@ const appRoutes: Routes = [
     loadChildren: '../garage/garage.module#GarageModule',
   },
   {
+    path: 'songs',
+    loadChildren: '../songs/songs.module#SongsModule',
+  },
+  {
     path: '**',
     // redirectTo: '/login',
     // pathMatch: 'full'
