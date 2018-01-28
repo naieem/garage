@@ -18,6 +18,11 @@ export class MenuComponent implements OnInit {
         name: 'Login',
         url: '/login',
         action: ''
+      },
+      {
+        name: 'Garage',
+        url: '/garage',
+        action: ''
       }
     ];
   }

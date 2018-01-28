@@ -1,0 +1,19 @@
+<form class="margin-top-20" (ngSubmit)="addNewCar()">
+    <div class="form-group">
+        <label for="">Car Name</label>
+        <input type="text" class="form-control" [(ngModel)]="car.name" name="name" placeholder="Car Name">
+    </div>
+    <div class="form-group">
+        <label for="">Car Model</label>
+        <input type="text" class="form-control" [(ngModel)]="car.model" name="model" placeholder="Car Model">
+    </div>
+    <div class="form-group">
+        <label for="">Car Model Year</label>
+        <input type="text" class="form-control" [(ngModel)]="car.modelYear" name="year" placeholder="Car Model Year">
+    </div>
+    <div class="form-group">
+        <label for="">Car description</label>
+        <textarea class="form-control" [(ngModel)]="car.description" name="desription" rows="10"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

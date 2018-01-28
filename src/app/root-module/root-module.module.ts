@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 // ----------- template constructing module ------------//
 import { LeftPanelModule } from '../left-panel/left-panel.module';
 import { RightPanelModule } from '../right-panel/right-panel.module';
+
 // ----------- loding main routing module ------------//
 import { AppRoutingModule } from '../app-routing/app-routing.module';
 // ----------- loading router modules ------------//

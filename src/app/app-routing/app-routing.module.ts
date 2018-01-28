@@ -7,16 +7,19 @@ import { LoginModule } from '../login/login.module';
 import { MainContentModule } from '../main-content/main-content.module';
 import { GarageModule } from '../garage/garage.module';
 import { PageNotFoundModule } from '../page-not-found/page-not-found.module';
+import { CarModule } from '../car/car.module';
 // ----------- importing dependency components list ------------//
 import { LoginComponent } from '../login/login/login.component';
 import { MainContentComponent } from '../main-content/main-content/main-content.component';
 import { GarageComponent } from '../garage/garage/garage.component';
+import { CarListComponent } from '../car/car-list/car-list.component';
+import { CarNewComponent } from '../car/car-new/car-new.component';
+import {  CarDetailsComponent} from '../car/car-details/car-details.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {
-    path: '',
-    component: MainContentComponent
+    path: '',component:MainContentComponent
   },
   {
     path: 'login',
@@ -24,7 +27,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'garage',
-    component: GarageComponent
+    // component: GarageComponent,
+    loadChildren: '../garage/garage.module#GarageModule',
   },
   {
     path: '**',
@@ -48,6 +52,6 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routerModules = [LoginModule, MainContentModule, GarageModule, PageNotFoundModule];
+export const routerModules = [LoginModule, MainContentModule, GarageModule, CarModule, PageNotFoundModule];
 
 

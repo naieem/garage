@@ -24,6 +24,10 @@
     text-decoration: none;
 }
 
+.main-menu li:first-child {
+    border-bottom: none;
+}
+
 .main-menu li:last-child {
     border-top: none;
 }
