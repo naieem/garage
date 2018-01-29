@@ -6,14 +6,18 @@ import { DataService } from '../../data-service/data.service';
   styleUrls: ['./songs.component.css']
 })
 export class SongsComponent implements OnInit {
-
+  songs:any[];
   constructor(private dataService: DataService) { }
-
   ngOnInit() {
-   this.dataService.getSong().subscribe(data => {
-    const items = data.json();
-    console.log(items.results);
-  });
+    this.getAllSongs();
+  }
+
+  getAllSongs(){
+    this.dataService.getSong().subscribe(data => {
+      const items = data.json();
+      this.songs=items.results;
+      console.log(this.songs);
+    });
   }
 
 }
