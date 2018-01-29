@@ -11,11 +11,12 @@ import 'rxjs/add/operator/do';
 export class DataService {
   apiRoot: string;
   constructor(private http: Http) {
-    this.apiRoot = 'https://itunes.apple.com/search?term=arrahman&media=music&limit=20';
+    this.apiRoot = 'https://itunes.apple.com/search';
   }
 
-  getSong() {
-    return this.http.get(this.apiRoot);
+  getSong(term: string) {
+    const url = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+    return this.http.get( url );
   }
 
 }
