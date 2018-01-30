@@ -59,6 +59,9 @@ export class SongsComponent implements OnInit {
     this.createFormControls();
     this.createForm();
   }
+  // ======================================
+  // Creating form controlls
+  // ======================================
   createFormControls() {
     this.term = new FormControl('', Validators.required);
     // this.lastName = new FormControl('sfds', Validators.required);
