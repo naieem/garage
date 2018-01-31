@@ -1,22 +1,50 @@
 import { Injectable } from '@angular/core';
 
-import {Http} from '@angular/http';
-// ----------- RXJS section ------------//
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/do';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
+
 @Injectable()
 export class DataService {
   apiRoot: string;
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this.apiRoot = 'https://itunes.apple.com/search';
   }
 
   getSong(term: string) {
     const url = `${this.apiRoot}?term=${term}&media=music&limit=20`;
-    return this.http.get( url );
+    // return this.http.get( url );
+    return this.http.get< any[]>(url).pipe(
+      tap(_ => this.log(`found heroes matching "${term}"`)),
+      catchError(this.handleError<any[]>('searchHeroes', []))
+    );
+  }
+
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    console.log(message);
+  }
+
+   /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
 }

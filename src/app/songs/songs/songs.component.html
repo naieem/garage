@@ -1,6 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <!-- showing a badge for total favourite item -->
+            <app-favourite-item [title]="favouriteTitle" [count]="favCounter"></app-favourite-item>
             <!-- form -->
             <form novalidate [formGroup]="myform">
 
@@ -40,13 +42,14 @@
         <span *ngIf="loading">Loading</span>
         <span *ngIf="noDataFound">No Data Found</span>
         <div *ngIf="!loading" class="row">
-            <div class="col-md-6" *ngFor="let song of songs">
+            <div class="col-md-6" *ngFor="let song of songs | async">
                 <div class="card margin-bottom-20">
                     <img class="card-img-top" src="{{song.artworkUrl100}}" alt="songs image">
                     <div class="card-body col-md-8">
                         <h5 class="card-title">{{song.trackName}}</h5>
                         <p class="card-text">{{song.collectionName}}</p>
                         <a href="{{song.collectionViewUrl}}" class="btn btn-primary" target="_blnk">Details</a>
+                        <button type="button" class="btn btn-info" (click)="addToFavourite(song)">Like</button>
                     </div>
                 </div>
             </div>

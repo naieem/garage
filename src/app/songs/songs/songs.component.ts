@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+// ======================================
+// RXjs libraries
+// ======================================
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { of } from 'rxjs/observable/of';
+
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+
 import { DataService } from '../../data-service/data.service';
 @Component({
   selector: 'app-songs',
@@ -7,9 +16,16 @@ import { DataService } from '../../data-service/data.service';
   styleUrls: ['./songs.component.css']
 })
 export class SongsComponent implements OnInit {
-  songs: any[];
+  songs: Observable<any[]>;
   loading: boolean;
   noDataFound: boolean;
+  private searchTerms = new Subject<string>();
+
+  // ----------- favourite counter configuration ------------//
+  favouriteList: any[] = [];
+  favouriteTitle: string;
+  favCounter: number;
+  // ----------- favourite counter configuration ends ------------//
   // langs: string[] = [
   //   'English',
   //   'French',
@@ -34,11 +50,35 @@ export class SongsComponent implements OnInit {
   // init function after all content loading
   // =========================================
   ngOnInit() {
+    this.favCounter = 0;
+    this.favouriteTitle = 'Favourite Itunes Items';
     // ----------- form controll initialization ------------//
     this.formControllInitialization();
     console.log(this.myform);
     // ----------- getting all songs ------------//
-    this.getAllSongs();
+    // this.getAllSongs();
+    this.songs = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.dataService.getSong(term)),
+    );
+    // this.dataService.getSong(this.myform.value.term).subscribe(data => {
+    //   const items = data.json();
+    //   this.songs = items.results;
+    //   if ( this.songs.length) {
+    //     this.loading = false;
+    //     this.noDataFound = false;
+    //   } else {
+    //     this.loading = false;
+    //     this.noDataFound = true;
+    //   }
+    //   console.log(this.songs);
+    // });
   }
 
   // ======================================
@@ -95,18 +135,14 @@ export class SongsComponent implements OnInit {
   searchItunes() {
     this.loading = true;
     this.noDataFound = false;
-    this.dataService.getSong(this.myform.value.term).subscribe(data => {
-      const items = data.json();
-      this.songs = items.results;
-      if ( this.songs.length) {
-        this.loading = false;
-        this.noDataFound = false;
-      } else {
-        this.loading = false;
-        this.noDataFound = true;
-      }
-      console.log(this.songs);
-    });
+    this.searchTerms.next(this.myform.value.term);
+  }
+  // ======================================
+  // Adding to favourite list
+  // ======================================
+  addToFavourite(songsInfo: any) {
+    this.favouriteList.push(songsInfo);
+    this.favCounter++;
   }
 
 }
