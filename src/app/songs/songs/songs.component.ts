@@ -100,6 +100,7 @@ export class SongsComponent implements OnInit {
       this.songs = items.results;
       if ( this.songs.length) {
         this.loading = false;
+        this.noDataFound = false;
       } else {
         this.loading = false;
         this.noDataFound = true;
