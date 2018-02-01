@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
@@ -13,13 +13,14 @@ export class DataService {
     this.apiRoot = 'https://itunes.apple.com/search';
   }
 
-  getSong(term: string) {
+  getSong(term: string): Observable<any> {
     const url = `${this.apiRoot}?term=${term}&media=music&limit=20`;
     // return this.http.get( url );
-    return this.http.get< any[]>(url).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<any[]>('searchHeroes', []))
-    );
+    return this.http.get(url).map((val: any) => val.results);
+    // .pipe(
+    //   tap(_ => this.log(`found heroes matching "${term}"`)),
+    //   catchError(this.handleError('getSong', []))
+    // );
   }
 
   /** Log a HeroService message with the MessageService */

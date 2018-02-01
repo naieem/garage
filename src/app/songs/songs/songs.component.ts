@@ -10,6 +10,7 @@ import { of } from 'rxjs/observable/of';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 import { DataService } from '../../data-service/data.service';
+import { FavouriteService } from '../../favourite-item/favourite.service';
 @Component({
   selector: 'app-songs',
   templateUrl: './songs.component.html',
@@ -44,7 +45,7 @@ export class SongsComponent implements OnInit {
   // email: FormControl;
   // password: FormControl;
   // language: FormControl;
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private favService: FavouriteService) { }
 
   // =========================================
   // init function after all content loading
@@ -54,31 +55,27 @@ export class SongsComponent implements OnInit {
     this.favouriteTitle = 'Favourite Itunes Items';
     // ----------- form controll initialization ------------//
     this.formControllInitialization();
-    console.log(this.myform);
-    // ----------- getting all songs ------------//
-    // this.getAllSongs();
+    // ----------- form controll initializaton ends ------------//
+    // ----------- Creating pipe for requests ------------//
     this.songs = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
-      debounceTime(300),
-
-      // ignore new term if same as previous term
+      debounceTime(500),
       distinctUntilChanged(),
-
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.dataService.getSong(term)),
+      switchMap((term: string) => this.dataService.getSong(term))
     );
-    // this.dataService.getSong(this.myform.value.term).subscribe(data => {
-    //   const items = data.json();
-    //   this.songs = items.results;
-    //   if ( this.songs.length) {
-    //     this.loading = false;
-    //     this.noDataFound = false;
-    //   } else {
-    //     this.loading = false;
-    //     this.noDataFound = true;
-    //   }
-    //   console.log(this.songs);
-    // });
+    /**
+     * decision making for loading and no data showing
+     * @param obj
+     */
+    this.songs.subscribe(res => {
+      if (res.length > 0) {
+        this.loading = false;
+        this.noDataFound = false;
+      } else {
+        this.loading = false;
+        this.noDataFound = true;
+      }
+    });
+    // ----------- Creating pipe for requests ends ------------//
   }
 
   // ======================================
@@ -143,6 +140,7 @@ export class SongsComponent implements OnInit {
   addToFavourite(songsInfo: any) {
     this.favouriteList.push(songsInfo);
     this.favCounter++;
+    this.favService.addNewFavItem(songsInfo);
   }
 
 }
