@@ -13,7 +13,7 @@ export class DataService {
     this.apiRoot = 'https://itunes.apple.com/search';
   }
 
-  getSong(term: string): Observable<any> {
+  getSong(term: string): Observable<any[]> {
     const url = `${this.apiRoot}?term=${term}&media=music&limit=20`;
     // return this.http.get( url );
     return this.http.get(url).map((val: any) => val.results);

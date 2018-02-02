@@ -4,10 +4,11 @@ import * as _ from 'lodash';
 @Injectable()
 export class FavouriteService {
   favItems: any[];
-  // Observable number sources
+  // Observable sources
   private newFavItemSource = new Subject<any>();
-  newFavItemAdded = this.newFavItemSource.asObservable();
-
+  private favitemCounterSource = new Subject<number>();
+  newFavItemAdded = this.newFavItemSource.asObservable(); // storing newly added favourite items
+  favItemCounter = this.favitemCounterSource.asObservable(); // storing added favourite items counter
   constructor() {
     this.favItems = [];
    }
@@ -16,6 +17,7 @@ export class FavouriteService {
     if (this.checkIfItemAlreadyExists(item) === -1) {
       this.favItems.push(item);
       this.newFavItemSource.next(item);
+      this.favitemCounterSource.next(this.favItems.length);
     }
   }
   checkIfItemAlreadyExists(item) {

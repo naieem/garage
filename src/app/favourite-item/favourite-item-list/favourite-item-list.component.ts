@@ -6,7 +6,7 @@ import { FavouriteService } from '../favourite.service';
   styleUrls: ['./favourite-item-list.component.css']
 })
 export class FavouriteItemListComponent implements OnInit {
-  favrouteItems: any[];
+  favrouteItems: any[] = [];
   constructor(private favService: FavouriteService) {
     favService.newFavItemAdded.subscribe(item => {
       this.favrouteItems.push(item);

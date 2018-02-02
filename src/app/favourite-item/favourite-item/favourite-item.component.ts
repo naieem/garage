@@ -13,7 +13,7 @@ export class FavouriteItemComponent implements OnInit {
      * subscribing to favservice for getting newly added fav Item
      * @param {}
      */
-    favService.newFavItemAdded.subscribe(res => {
+    favService.favItemCounter.subscribe(res => {
       this.count = res;
     });
   }
